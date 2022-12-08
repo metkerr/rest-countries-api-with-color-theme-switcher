@@ -5,7 +5,7 @@ import axios from "axios";
 import numberFormat from "../utils/numberFormat";
 import renderCapitals from "../utils/renderCapitals";
 
-export default function Details() {
+export default function Details({ isDarkMode }) {
   const { countryName } = useParams();
   const [country, setCountry] = useState();
   const [borderNames, setBorderNames] = useState([]);
@@ -66,7 +66,9 @@ export default function Details() {
               <Link
                 to={`/details/${borderCountry}`}
                 key={borderCountry}
-                className="py-1 mr-2 mb-2 px-6 shadow-3xl active:bg-dark-gray active:text-white whitespace-nowrap"
+                className={`py-1 mr-2 mb-2 px-6  active:bg-dark-gray active:text-white whitespace-nowrap ${
+                  isDarkMode ? "bg-dark-blue" : "shadow-3xl"
+                }`}
               >
                 {borderCountry}
               </Link>
@@ -81,15 +83,21 @@ export default function Details() {
         <section id="details-wrapper " className="mx-5 my-7 flex flex-col">
           <Link
             to="/"
-            className="flex shadow-3xl w-24 justify-between px-5 py-1 mb-14"
+            className={`flex  w-24 justify-between px-5 py-1 mb-14 ${
+              isDarkMode ? "bg-dark-blue" : "shadow-3xl"
+            }`}
           >
             <span>
-              <img src={arrowBack} alt="back icon" className="w-5" />
+              <img
+                src={arrowBack}
+                alt="back icon"
+                className={`w-5 ${isDarkMode && "invert"}`}
+              />
             </span>
             <span className="my-auto">Back</span>
           </Link>
 
-          <div id="c-flag" className="mx-auto mb-4">
+          <div id="c-flag" className="mx-auto mb-4 w-full">
             <img
               src={flags?.png}
               alt={`${name.common} flag`}

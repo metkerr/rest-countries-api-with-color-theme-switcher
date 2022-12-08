@@ -1,12 +1,21 @@
+import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Details from "./Component/Details";
 import Header from "./Component/Header";
 import Homepage from "./Component/Homepage";
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const darkModeToggle = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const className = isDarkMode
+    ? "bg-very-dark-blue-D text-white"
+    : "bg-very-light-gray text-very-dark-blue-L";
   return (
-    <div id="app" className="bg-very-light-gray">
-      <Header />
+    <div id="app" className={`pb-5 ${className}`}>
+      <Header isDarkMode={isDarkMode} darkModeToggle={darkModeToggle} />
       <Routes>
         <Route
           path="*"
@@ -22,8 +31,18 @@ function App() {
             </div>
           }
         />
-        <Route path="/" element={<Homepage />} />
-        <Route path="/details/:countryName" element={<Details />} />
+        <Route
+          path="/"
+          element={
+            <Homepage isDarkMode={isDarkMode} darkModeToggle={darkModeToggle} />
+          }
+        />
+        <Route
+          path="/details/:countryName"
+          element={
+            <Details isDarkMode={isDarkMode} darkModeToggle={darkModeToggle} />
+          }
+        />
       </Routes>
     </div>
   );

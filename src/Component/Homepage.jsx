@@ -5,13 +5,13 @@ import numberFormat from "../utils/numberFormat";
 import renderCapitals from "../utils/renderCapitals";
 import { Link } from "react-router-dom";
 
-export default function Homepage() {
+export default function Homepage({ isDarkMode }) {
   const [isHidden, setIsHidden] = useState(true);
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState();
   const [selectedRegion, setSelectedRegion] = useState();
 
-  console.log(selectedRegion);
+  // console.log(selectedRegion);
 
   useEffect(() => {
     let cancel = false;
@@ -53,17 +53,23 @@ export default function Homepage() {
   const CountryCard = ({ country }) => {
     if (country) {
       const { flags, name, population, region, capital = [] } = country;
-      console.log(country);
+      // console.log(country);
       //CountryCard Component
 
       return (
         <Link to={`/details/${name?.common}`}>
           <div
             id="card-container"
-            className="min-h-min bg-white rounded-md shadow-3xl pb-5 w-68 mx-auto mb-10"
+            className={`min-h-min  rounded-md  pb-5 w-68 mx-auto mb-10 ${
+              isDarkMode ? "bg-dark-blue" : "bg-white shadow-3xl"
+            }`}
           >
             <div id="c-flag">
-              <img src={flags?.png} alt="c-flag" className="w-full" />
+              <img
+                src={flags?.png}
+                alt="c-flag"
+                className="w-full rounded-t-md"
+              />
             </div>
             <div id="c-details" className="p-7">
               <h3 className="font-bold text-lg pb-4">{name.common}</h3>
@@ -91,25 +97,33 @@ export default function Homepage() {
       <div className="homepage-wrapper mx-5 my-7 flex flex-col">
         <div
           id="input-wrapper "
-          className="py-1 px-5 shadow-3xl rounded-md bg-white flex"
+          className={`py-1 px-5  rounded-md  flex ${
+            isDarkMode ? "bg-dark-blue" : "shadow-3xl bg-white"
+          }`}
         >
           <span className="m-auto w-14">
             <img
               src={searchImg}
               alt="search icon"
-              className="w-4.5 mx-auto opacity-40"
+              className={`w-4.5 mx-auto ${
+                isDarkMode ? "invert" : "opacity-40"
+              }`}
             />
           </span>
           <input
             type="search"
             placeholder="Search for a country..."
-            className="p-3 grow"
+            className={`p-3 grow ${
+              isDarkMode && "bg-dark-blue text-white placeholder-white"
+            }`}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div
           id="dropdown-container"
-          className="filter-wrapper my-10 bg-white shadow-3xl w-52 flex flex-col relative rounded-md"
+          className={`filter-wrapper my-10   w-52 flex flex-col relative rounded-md ${
+            isDarkMode ? "bg-dark-blue" : "bg-white shadow-3xl"
+          }`}
         >
           <div
             className="dropdown-button flex justify-between p-4 cursor-pointer"
@@ -128,15 +142,17 @@ export default function Homepage() {
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M18.5303 9.46967C18.8232 9.76256 18.8232 10.2374 18.5303 10.5303L12.5303 16.5303C12.2374 16.8232 11.7626 16.8232 11.4697 16.5303L5.46967 10.5303C5.17678 10.2374 5.17678 9.76256 5.46967 9.46967C5.76256 9.17678 6.23744 9.17678 6.53033 9.46967L12 14.9393L17.4697 9.46967C17.7626 9.17678 18.2374 9.17678 18.5303 9.46967Z"
-                  fill="#030D45"
+                  fill={`${isDarkMode ? "#fff" : "#030D45"}`}
                 />
               </svg>
             </span>
           </div>
           <div
-            className={`dropdown-list absolute bg-white mt-14 w-52 shadow-3xl py-3 rounded-md ${
+            className={`dropdown-list absolute  mt-14 w-52  py-3 rounded-md ${
               isHidden && "hidden"
-            }`}
+            }
+              ${isDarkMode ? "bg-dark-blue text-white" : "shadow-3xl bg-white"}
+            `}
           >
             <div
               className="px-4 py-1 active:font-semibold"
