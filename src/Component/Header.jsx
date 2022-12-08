@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container flex">
         <div
           id="header-wrapper"
-          className="flex container px-5 py-1 justify-between shadow-md h-22"
+          className="flex container px-5 py-1 justify-between shadow-3xl h-22"
         >
           <div className="header-title font-bold my-auto">
             Where in the world?

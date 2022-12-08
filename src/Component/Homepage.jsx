@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import numberFormat from "../utils/numberFormat";
 import renderCapitals from "../utils/renderCapitals";
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   const [isHidden, setIsHidden] = useState(true);
@@ -52,32 +53,35 @@ export default function Homepage() {
   const CountryCard = ({ country }) => {
     if (country) {
       const { flags, name, population, region, capital = [] } = country;
+      console.log(country);
       //CountryCard Component
 
       return (
-        <div
-          id="card-container"
-          className="min-h-min bg-white rounded-md shadow-md pb-5 w-68 mx-auto mb-10"
-        >
-          <div id="c-flag">
-            <img src={flags?.png} alt="c-flag" className="w-full" />
+        <Link to={`/details/${name?.common}`}>
+          <div
+            id="card-container"
+            className="min-h-min bg-white rounded-md shadow-3xl pb-5 w-68 mx-auto mb-10"
+          >
+            <div id="c-flag">
+              <img src={flags?.png} alt="c-flag" className="w-full" />
+            </div>
+            <div id="c-details" className="p-7">
+              <h3 className="font-bold text-lg pb-4">{name.common}</h3>
+              <p className="pb-1.5">
+                <span className="font-semibold">Population: </span>
+                {numberFormat(population)}
+              </p>
+              <p className="pb-1.5">
+                <span className="font-semibold">Region: </span>
+                {region}
+              </p>
+              <p>
+                <span className="font-semibold">Capital: </span>
+                {renderCapitals(capital)}
+              </p>
+            </div>
           </div>
-          <div id="c-details" className="p-7">
-            <h3 className="font-bold text-lg pb-4">{name.common}</h3>
-            <p className="pb-1.5">
-              <span className="font-semibold">Population: </span>
-              {numberFormat(population)}
-            </p>
-            <p className="pb-1.5">
-              <span className="font-semibold">Region: </span>
-              {region}
-            </p>
-            <p>
-              <span className="font-semibold">Capital: </span>
-              {renderCapitals(capital)}
-            </p>
-          </div>
-        </div>
+        </Link>
       );
     }
   };
@@ -87,7 +91,7 @@ export default function Homepage() {
       <div className="homepage-wrapper mx-5 my-7 flex flex-col">
         <div
           id="input-wrapper "
-          className="py-1 px-5 shadow-md rounded-md bg-white flex"
+          className="py-1 px-5 shadow-3xl rounded-md bg-white flex"
         >
           <span className="m-auto w-14">
             <img
@@ -105,7 +109,7 @@ export default function Homepage() {
         </div>
         <div
           id="dropdown-container"
-          className="filter-wrapper my-10 bg-white shadow-md w-52 flex flex-col relative rounded-md"
+          className="filter-wrapper my-10 bg-white shadow-3xl w-52 flex flex-col relative rounded-md"
         >
           <div
             className="dropdown-button flex justify-between p-4 cursor-pointer"
@@ -130,7 +134,7 @@ export default function Homepage() {
             </span>
           </div>
           <div
-            className={`dropdown-list absolute bg-white mt-14 w-52 shadow-md py-3 rounded-md ${
+            className={`dropdown-list absolute bg-white mt-14 w-52 shadow-3xl py-3 rounded-md ${
               isHidden && "hidden"
             }`}
           >
