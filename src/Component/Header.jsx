@@ -1,18 +1,19 @@
 import moonImg from "../assets/moon.svg";
 import darkMoonImg from "../assets/dark-moon.svg";
+import { Link } from "react-router-dom";
 
 export default function Header({ isDarkMode, darkModeToggle }) {
   const className = isDarkMode ? "bg-dark-blue" : "bg-white shadow-3xl";
   return (
     <header>
-      <div className="container flex">
+      <div className={`flex  ${className}`}>
         <div
           id="header-wrapper"
-          className={`flex container px-5 py-1 justify-between h-22 ${className}`}
+          className={`flex container mx-auto px-5 py-1 justify-between h-22 sm:px-0`}
         >
-          <div className="header-title font-bold my-auto">
+          <Link to="/" className="header-title font-bold my-auto sm:text-xl">
             Where in the world?
-          </div>
+          </Link>
           <button
             className="dark-mode-switcher font-semibold flex"
             onClick={() => darkModeToggle()}
