@@ -36,7 +36,7 @@ Users should be able to:
 ### Screenshot
 
 <img src="../screenshots/homepage_s.png" alt="homepage" width="400"/>
-<img src="../screenshots/details_s.png" alt="homepage" width="379.5"/>
+<img src="../screenshots/details_s.png" alt="details" width="379.5"/>
 
 ### Links
 
