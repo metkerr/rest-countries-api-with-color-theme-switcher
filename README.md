@@ -18,8 +18,6 @@ This is a solution to the [REST Countries API with color theme switcher challeng
     - [📦 Install dependencies](#-install-dependencies)
     - [✨ Start/Run the app](#-startrun-the-app)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
